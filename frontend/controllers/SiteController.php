@@ -18,6 +18,8 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use common\models\Files;
+use yii\web\UploadedFile;
+use yii\helpers\FileHelper;
 
 
 /**
@@ -79,14 +81,14 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $id=Yii::$app->user->getId();
-        if($id!=NULL){
+        if(Yii::$app->user->getId()!=NULL){
+            $id=Yii::$app->user->getId();
             $query = Files::find()->Where(['user_id' => $id])->orWhere(['or',
             ['status'=>'public']]);
             $files = $query->all();
         }else{
-            //$query = Files::find()->Where(['status' => 'public']);
-            //$files = $query->all();
+            $query = Files::find()->Where(['status' => 'public']);
+            $files = $query->all();
         }
         return $this->render('index',['files'=>$files]);
         
@@ -99,9 +101,69 @@ class SiteController extends Controller
      */
     public function actionCreate()
     {
-        
-        return $this->render('create');
+        $file=new Files();
+        $formData = yii::$app->request->post();
+        $file->user_id=Yii::$app->user->getId(); 
+        $id=Yii::$app->user->getId();
+
+
+        if($file->load($formData)){
+            
+            $name=Yii::$app->user->identity->username;
+            $file->name = UploadedFile::getInstance($file, 'name');
+            $file_path = \Yii::$app->basePath.'/uploads/'.$name.'/';
+            $document_name = UploadedFile::getInstance($file, 'name');
+
+          
+
+            if($file->save()){
+
+                if(!empty($document_name->name))
+                {  
+                    $file->name = $document_name->name;
+                    $document_name->saveAs(\Yii::$app->basePath.'/uploads/'.$name.'/'.$document_name->name);    
+                }
+
+                Yii::$app->session->setFlash('success', 'File Uploaded Successfully');
+                return $this->goHome();
+            }else{
+                
+                Yii::$app->session->setFlash('error', 'Failed to Upload File');
+                return $this->redirect(['create']);
+            }
+        }
+        return $this->render('create',['file'=>$file]);
     }
+    public function actionUpdate($id)
+    {
+        $file=Files::findOne($id);
+        if($file->load(Yii::$app->request->post())){
+                $name=Yii::$app->user->identity->username;
+                $file->name = UploadedFile::getInstance($file, 'name');
+                $file_path = \Yii::$app->basePath.'/uploads/'.$name.'/';
+                $document_name = UploadedFile::getInstance($file, 'name');
+
+                if($file->save()){
+                    if(!empty($document_name->name))
+                    {  
+                        $file->name = $document_name->name;
+                        $document_name->saveAs(\Yii::$app->basePath.'/uploads/'.$name.'/'.$document_name->name);  
+                        Yii::$app->session->setFlash('success', 'File Uploaded Successfully');
+                        return $this->goHome();  
+                    }
+                }else{
+                    Yii::$app->session->setFlash('error', 'Failed to Update File Details');
+                    return $this->goHome();
+                }
+        }
+        return $this->render('update',['file'=>$file]);
+    }    
+    public function actionDelete($id)
+    {
+        $file=Files::findOne($id)->delete();
+        Yii::$app->session->setFlash('success', 'File Deleted Successfully');
+        return $this->goHome();
+    }    
     /**
      * Logs in a user.
      *
@@ -163,7 +225,6 @@ class SiteController extends Controller
             } else {
                 Yii::$app->session->setFlash('error', 'There was an error sending your message.');
             }
-
             return $this->refresh();
         }
 
@@ -191,10 +252,11 @@ class SiteController extends Controller
     {
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
-            Yii::$app->session->setFlash('success', 'Thank you for registration. Please Login.');
+            $id=Yii::$app->user->getId();
+            mkdir('../uploads/' .$model->username);
+            Yii::$app->session->setFlash('success', 'Thank you for registration. Please Try Login.');
             return $this->goHome();
         }
-
         return $this->render('signup', [
             'model' => $model,
         ]);

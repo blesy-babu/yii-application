@@ -4,12 +4,7 @@ use yii\helpers\html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
-//print_r(Yii::$app->user->identity->id);
-//die();
 
-//echo '<pre>';
-//print_r($files);
-//die();
 
 $this->title = 'My Yii Application';
 
@@ -17,7 +12,7 @@ $this->title = 'My Yii Application';
 
 <div class="site-index">
 
-    <h1>Upload File here</h1>
+    <h1>Update File Details</h1>
 
     <div class="body-content">
         <?php $form = ActiveForm::begin() ?>
@@ -49,7 +44,7 @@ $this->title = 'My Yii Application';
                     <a href=<?php echo yii::$app->homeUrl; ?> class="btn btn-secondary">Go Back</a>
                 </div>
                 <div class="col-lg-6 d-flex flex-row-reverse">
-                    <?= Html::submitButton('Create File', ['class' => 'btn btn-success']); ?>
+                    <?= Html::submitButton('Update', ['class' => 'btn btn-success']); ?>
                 </div>
             </div>    
             </div>
