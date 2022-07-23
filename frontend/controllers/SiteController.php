@@ -85,8 +85,8 @@ class SiteController extends Controller
             ['status'=>'public']]);
             $files = $query->all();
         }else{
-            $query = Files::find()->Where(['status' => 'public']);
-            $files = $query->all();
+            //$query = Files::find()->Where(['status' => 'public']);
+            //$files = $query->all();
         }
         return $this->render('index',['files'=>$files]);
         
