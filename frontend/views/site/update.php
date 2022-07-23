@@ -4,27 +4,19 @@ use yii\helpers\html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
-
-
 $this->title = 'My Yii Application';
-
 ?>
-
 <div class="site-index">
-
-<script>  
-    function hideAndShow(){
-        document.getElementById('invisible_file').style.cssText = 'display:block !important';
-        document.getElementById('change_file').style.cssText = 'display:none !important';
-    }
-</script>
-
+    <script>
+        function hideAndShow() {
+            document.getElementById('invisible_file').style.cssText = 'display:block !important';
+            document.getElementById('change_file').style.cssText = 'display:none !important';
+        }
+    </script>
     <h1>Update File Details</h1>
-
     <div class="body-content">
         <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
         <div class="row">
-
             <div class="col-lg-6 offset-lg-6">
                 <?= $form->field($file, 'title') ?>
             </div>
@@ -38,15 +30,12 @@ $this->title = 'My Yii Application';
             <div class="col-lg-6 offset-lg-6">
                 <?php
                 $hint = 'Info : Supported file types are .png, .jpg, .pdf, .jpeg , Maximum size : 2MB';
-                echo $form->field($file, 'name')->fileInput(['value' =>'../uploads/'.$file->name,'id' => 'invisible_file', 'class' => 'd-none'])->hint($hint)->label(false);
+                echo $form->field($file, 'name')->fileInput(['value' => '../uploads/' . $file->name, 'id' => 'invisible_file', 'class' => 'd-none'])->hint($hint)->label(false);
                 ?>
-                
-
-                <div class="alert alert-warning alert-dismissible fade show " id="change_file"  onclick="hideAndShow()"  role="alert">
-                    <strong><?php echo $file['name']?></strong> 
+                <div class="alert alert-warning alert-dismissible fade show " id="change_file" onclick="hideAndShow()" role="alert">
+                    <strong><?php echo $file['name'] ?></strong>
                     <button type="button" class="btn btn-info">Replace</button>
                 </div>
-
             </div>
         </div>
         <div class="row">
@@ -61,7 +50,6 @@ $this->title = 'My Yii Application';
                     </div>
                 </div>
             </div>
-
         </div>
         <?php ActiveForm::end(); ?>
     </div>
