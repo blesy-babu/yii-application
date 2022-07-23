@@ -1,9 +1,6 @@
 <?php
 
 namespace frontend\controllers;
-
-
-
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -20,6 +17,7 @@ use frontend\models\ContactForm;
 use common\models\Files;
 use yii\web\UploadedFile;
 use yii\helpers\FileHelper;
+
 
 
 /**
@@ -58,6 +56,7 @@ class SiteController extends Controller
         ];
     }
 
+
     /**
      * {@inheritdoc}
      */
@@ -73,6 +72,7 @@ class SiteController extends Controller
             ],
         ];
     }
+
 
     /**
      * Displays homepage.
@@ -96,8 +96,10 @@ class SiteController extends Controller
             return $this->render('index', ['files' => $files, 'user_id' => null, 'user_name' => null]);
         }
     }
+
+
     /**
-     * Displays Create Page.
+     * Create Files.
      *
      * @return mixed
      */
@@ -107,17 +109,11 @@ class SiteController extends Controller
         $formData = yii::$app->request->post();
         $file->user_id = Yii::$app->user->getId();
         $id = Yii::$app->user->getId();
-
-
         if ($file->load($formData)) {
-
             $name = Yii::$app->user->identity->username;
             $file->name = UploadedFile::getInstance($file, 'name');
             $file_path = \Yii::$app->basePath . '/uploads/';
             $document_name = UploadedFile::getInstance($file, 'name');
-
-
-
             if ($file->save()) {
 
                 if (!empty($document_name->name)) {
@@ -135,20 +131,21 @@ class SiteController extends Controller
         }
         return $this->render('create', ['file' => $file]);
     }
+
+
+    /**
+     * Update Files.
+     *
+     * @return mixed
+     */
     public function actionUpdate($id)
     {
         $file = Files::findOne($id);
         $doc_name = $file->name;
-
         if ($file->load(Yii::$app->request->post())) {
-
-
             $file->name = UploadedFile::getInstance($file, 'name');
             $document_name = UploadedFile::getInstance($file, 'name');
-
-
             $temp = UploadedFile::getInstance($file, 'name');
-
             if ($temp == null) {
                 $file->name = $doc_name;
                 if ($file->save()) {
@@ -169,16 +166,23 @@ class SiteController extends Controller
                 }
             }
         }
-
-
         return $this->render('update', ['file' => $file]);
     }
+
+
+    /**
+     * Delete Files.
+     *
+     * @return mixed
+     */
     public function actionDelete($id)
     {
         $file = Files::findOne($id)->delete();
         Yii::$app->session->setFlash('success', 'File Deleted Successfully');
         return $this->goHome();
     }
+
+
     /**
      * Logs in a user.
      *
@@ -217,6 +221,7 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+    
 
     /**
      * Logs out the current user.

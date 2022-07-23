@@ -1,18 +1,8 @@
 <?php
-
 use yii\helpers\html;
 use yii\widgets\ActiveForm;
-
 /** @var yii\web\View $this */
-//print_r(Yii::$app->user->identity->id);
-//die();
-
-//echo '<pre>';
-//print_r($files);
-//die();
-
 $this->title = 'My Yii Application';
-
 ?>
 
 <div class="site-index">
@@ -26,12 +16,13 @@ $this->title = 'My Yii Application';
             } 
         }
     </script>
-    <h1>Upload File here</h1>
-
+    
     <div class="body-content">
         <?php $form = ActiveForm::begin() ?>
         <div class="row">
-
+            <div class="col-lg-6 offset-lg-6">
+                <h3>Upload File here : </h3>
+            </div>
             <div class="col-lg-6 offset-lg-6">
                 <?= $form->field($file, 'title') ?>
             </div>
