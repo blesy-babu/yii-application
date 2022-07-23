@@ -27,7 +27,7 @@ $this->title = 'My Yii Application';
     <div class="row">
         <table class="table table-hover">
             <thead>
-                <tr>
+                <tr class="table-primary">
                     <th scope="col">Sl No</th>
                     <th scope="col">Title</th>
                     <th scope="col">Description</th>
@@ -42,16 +42,16 @@ $this->title = 'My Yii Application';
                     if(count($files)>0):
                         foreach($files as $file):
                 ?>
-                <tr class="table-active">
+                <tr class="table-">
                     <td><?php echo ++$i; ?></td>
                     <td><?php echo $file->title; ?></td>
                     <td><?php echo $file->description; ?></td>
-                    <td><?php echo $file->status; ?></td>
                     <td><?php echo $file->name; ?></td>
+                    <td><?php echo $file->status; ?></td>
                     <td>
-                        <span><?= Html::a('View') ?></span>
-                        <span><?= Html::a('Update') ?></span>
-                        <span><?= Html::a('Delete') ?></span>
+                        <span><?= Html::a('View',['view','id'=>$file->id],['class'=>'btn btn-success']) ?></span>
+                        <span><?= Html::a('Update',['update','id'=>$file->id],['class'=>'btn btn-primary']) ?></span>
+                        <span><?= Html::a('Delete',['delete','id'=>$file->id],['class'=>'btn btn-danger']) ?></span>
                     </td>
                 </tr>
                 <?php 
