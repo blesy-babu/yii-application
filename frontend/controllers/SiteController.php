@@ -175,6 +175,31 @@ class SiteController extends Controller
      *
      * @return mixed
      */
+    public function actionPrivate($id)
+    {
+        $file = Files::findOne($id);
+        $file->status = 'public';
+        if ($file->save()) {
+            Yii::$app->session->setFlash('success', 'Your File Status Updated Successfully to Public');
+            return $this->goHome();
+        }
+        
+    }
+    public function actionPublic($id)
+    {
+        $file = Files::findOne($id);
+        $file->status = 'private';
+        if ($file->save()) {
+            Yii::$app->session->setFlash('success', 'Your File Status Updated Successfully to Private');
+            return $this->goHome();
+        }
+    }
+
+    /**
+     * Delete Files.
+     *
+     * @return mixed
+     */
     public function actionDelete($id)
     {
         $file = Files::findOne($id)->delete();

@@ -29,7 +29,7 @@ $this->title = 'My Yii Application';
             </div>
             <div class="col-lg-6 offset-lg-6">
                 <?php
-                $hint = 'Info : Supported file types are .png, .jpg, .pdf, .jpeg , Maximum size : 2MB';
+                $hint = 'Info : Supported file types are .png, .jpg, .pdf, .jpeg , Maximum size : 1 GB';
                 echo $form->field($file, 'name')->fileInput(['value' => '../uploads/' . $file->name, 'id' => 'invisible_file', 'class' => 'd-none'])->hint($hint)->label(false);
                 ?>
                 <div class="alert alert-warning alert-dismissible fade show " id="change_file" onclick="hideAndShow()" role="alert">
