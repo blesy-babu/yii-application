@@ -1,60 +1,53 @@
-<p align="center">
-    <a href="https://github.com/yiisoft" target="_blank">
-        <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
-    </a>
-    <h1 align="center">Yii 2 Advanced Project Template</h1>
-    <br>
-</p>
+File Manager
 
-Yii 2 Advanced Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
-developing complex Web applications with multiple tiers.
+Task Description: File manager for different users
+Programing Language: PHP
+Framework: Yii2 [MVC]
+Database: phpMyAdmin
+Code editor: VS Code
 
-The template includes three tiers: front end, back end, and console, each of which
-is a separate Yii application.
+To install is project follow the Steps : 
 
-The template is designed to work in a team development environment. It supports
-deploying the application in different environments.
+Step1: Download the zip file yii-application-main from GitHub
+	Url: https://github.com/blesy-babu/yii-application.git
+Step2: Move the file to your domain folder and extract
+Step3: Open Command Prompt and change path to yii-application-main folder,
+	Then perform, php init	 
+	Then Select Developer Option and Confirm.
+ 
+ 
 
-Documentation is at [docs/guide/README.md](docs/guide/README.md).
 
-[![Latest Stable Version](https://img.shields.io/packagist/v/yiisoft/yii2-app-advanced.svg)](https://packagist.org/packages/yiisoft/yii2-app-advanced)
-[![Total Downloads](https://img.shields.io/packagist/dt/yiisoft/yii2-app-advanced.svg)](https://packagist.org/packages/yiisoft/yii2-app-advanced)
-[![build](https://github.com/yiisoft/yii2-app-advanced/workflows/build/badge.svg)](https://github.com/yiisoft/yii2-app-advanced/actions?query=workflow%3Abuild)
 
-DIRECTORY STRUCTURE
--------------------
+Step4: Create Database with name yiiapplicationmain
+	 
 
-```
-common
-    config/              contains shared configurations
-    mail/                contains view files for e-mails
-    models/              contains model classes used in both backend and frontend
-    tests/               contains tests for common classes    
-console
-    config/              contains console configurations
-    controllers/         contains console controllers (commands)
-    migrations/          contains database migrations
-    models/              contains console-specific model classes
-    runtime/             contains files generated during runtime
-backend
-    assets/              contains application assets such as JavaScript and CSS
-    config/              contains backend configurations
-    controllers/         contains Web controller classes
-    models/              contains backend-specific model classes
-    runtime/             contains files generated during runtime
-    tests/               contains tests for backend application    
-    views/               contains view files for the Web application
-    web/                 contains the entry script and Web resources
-frontend
-    assets/              contains application assets such as JavaScript and CSS
-    config/              contains frontend configurations
-    controllers/         contains Web controller classes
-    models/              contains frontend-specific model classes
-    runtime/             contains files generated during runtime
-    tests/               contains tests for frontend application
-    views/               contains view files for the Web application
-    web/                 contains the entry script and Web resources
-    widgets/             contains frontend widgets
-vendor/                  contains dependent 3rd-party packages
-environments/            contains environment-based overrides
-```
+Step5: Open the Project with the code editor
+And Change dbname as yiiapplicationmain in file,
+yii-application-main\backend\config\main-local.php
+ 
+And save file
+
+
+
+Step6: Open Terminal and perform migration
+	php yii migrate
+
+	 
+	Select yes,
+	 
+	Now the project is ready to run in your localhost
+
+Step7: Open the browser and access,
+localhost/yii-application-main/frontend/web/index.php
+
+
+
+
+
+
+
+ 
+
+
+
