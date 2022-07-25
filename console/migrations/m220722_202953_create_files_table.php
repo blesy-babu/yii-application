@@ -15,7 +15,7 @@ class m220722_202953_create_files_table extends Migration
         $this->createTable('{{%files}}', [
             'id' => $this->primaryKey(),
             'user_id'=>$this->integer(10)->notNull(),
-            'title' => $this->string(50)->notNull()->unique(),
+            'title' => $this->string(50)->notNull(),
             'description' => $this->string()->notNull(),
             'name'=> $this->string(50)->notNull(),
             'status' => $this->string(10)->notNull(),
